@@ -1,4 +1,5 @@
 
+import 'package:cafe_dio/repositories/categories/categories_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/crypto_coin_tile.dart';
@@ -10,9 +11,17 @@ class CategoriesListScreen extends StatefulWidget {
 
   @override
   State<CategoriesListScreen> createState() => _CategoriesListScreenState();
+
 }
 
 class _CategoriesListScreenState extends State<CategoriesListScreen> {
+
+  // @override
+  // void initState() {
+  //   CategoriesRepository().getCategories();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +36,12 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
           return const CategoriesTile(coinName: coinName);
         },
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        CategoriesRepository().getCategories();
+      },
+      child: const Icon(Icons.abc_sharp),
+      ),
+
     );
   }
 }
