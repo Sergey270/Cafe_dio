@@ -1,25 +1,24 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
-import 'models/сategories.dart';
+import 'models/categories.dart';
 
 class CategoriesRepository {
-  Future<List<Categories>> getCategories() async {
+  Future<List<Categories>>   getCategories() async {
+   // List<Categories>  categoryList = [];
     final response = await Dio()
         .get("https://run.mocky.io/v3/058729bd-1402-4578-88de-265481fd7d54");
    // debugPrint(response.toString());
-    final data2 = response.data as Map<String, dynamic> ;
-
-    final json = data2.entries.map(( e) =>
-
-      Categories(id:  data2['id'] ,
-          name: data2['name'],
-          image_url: data2['image_url'],
+    final jsonData  = response.data ;
+    final categoriesData = jsonData['сategories'] as List<dynamic>;
 
 
-      ),
-    ).toList();
-// List<Categories>.from(response.data["сategories"]) ;
-    return json ;
+    return categoriesData
+        .map((categoryData) => Categories.fromJson(categoryData))
+        .toList();
+
+
   }
 }
 
