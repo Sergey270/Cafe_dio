@@ -11,8 +11,8 @@ class CafeListApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CryptoCurrenciesList',
-      theme: darkTheme,
+     // title: 'CryptoCurrenciesList',
+      theme: lightTheme,
       routes: routes,
     );
   }

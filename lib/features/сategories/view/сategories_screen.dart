@@ -27,9 +27,24 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('CryptoCurrenciesList'),
-      ),
+       appBar: AppBar(
+         title: const ListTile(
+           title: Row(
+             children: [
+               Icon(Icons.location_on_outlined),
+               Text('CryptoCurrenciesList'),
+             ],
+           ),
+           subtitle:  Text('Crypto3333') ,
+
+         ),actions: [
+           Container(
+             height: 44,
+             width: 44,
+           )
+       ],
+       ),
+
       body: (_categoriesList == null)? const SizedBox()
       :
       ListView.builder(
