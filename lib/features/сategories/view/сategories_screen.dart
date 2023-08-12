@@ -44,8 +44,14 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
               },
             );
           }
-
-          return const Center(child: CircularProgressIndicator(),);
+          if (state is CategoriesLoadingFailure) {
+            return const Center(
+              child: Text(  'Нет Интернета'),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
 

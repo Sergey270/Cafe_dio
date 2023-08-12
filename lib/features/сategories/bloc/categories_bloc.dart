@@ -12,8 +12,12 @@ part 'categories_state.dart';
 class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
   CategoriesBloc() : super(CategoriesInitial()) {
     on<LoadCategories>((event, emit) async{
-     final categoriesList = await CategoriesRepository().getCategories();
-       emit(CategoriesLoaded(categoriesList: categoriesList));
+     try {
+       final categoriesList = await CategoriesRepository().getCategories();
+         emit(CategoriesLoaded(categoriesList: categoriesList));
+     }   catch (e) {
+       emit(CategoriesLoadingFailure(exception: e));
+     }
     });
   }
 }

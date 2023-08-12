@@ -10,4 +10,8 @@ class CategoriesLoaded extends CategoriesState {
 
   CategoriesLoaded({required this.categoriesList});
 }
+class CategoriesLoadingFailure extends CategoriesState {
+final Object? exception;
 
+  CategoriesLoadingFailure( {this.exception});
+}
