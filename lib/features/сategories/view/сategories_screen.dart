@@ -1,4 +1,3 @@
-
 import 'package:cafe_dio/repositories/categories/categories_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +11,10 @@ class CategoriesListScreen extends StatefulWidget {
 
   @override
   State<CategoriesListScreen> createState() => _CategoriesListScreenState();
-
 }
 
 class _CategoriesListScreenState extends State<CategoriesListScreen> {
-
- List<Categories>? _categoriesList;
+  List<Categories>? _categoriesList;
   // @override
   // void initState() {
   //   CategoriesRepository().getCategories();
@@ -27,44 +24,58 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-         title: const ListTile(
-           title: Row(
-             children: [
-               Icon(Icons.location_on_outlined),
-               Text('CryptoCurrenciesList'),
-             ],
-           ),
-           subtitle:  Text('Crypto3333') ,
+      appBar: AppBar(
+        leadingWidth: 18,
+        elevation: 0,
+        leading: const Padding(
+          padding: EdgeInsets.all(16),
+          child: Icon(
+            Icons.fmd_good_outlined,
+            color: Colors.black, size: 30,
+          ),
+        ),
+        title:   Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                  'Санкт-Петербург',
+                  style: Theme.of(context).appBarTheme.titleTextStyle,
+                ),
+              Text(
+                '12 Августа, 2023',
+                style: Theme.of(context).appBarTheme.toolbarTextStyle,
+              ),
+            ],
+          ),
+        ),
 
-         ),actions: [
-           Container(
-             height: 44,
-             width: 44,
-           )
-       ],
-       ),
 
-      body: (_categoriesList == null)? const SizedBox()
-      :
-      ListView.builder(
-        itemCount: _categoriesList!.length,
-       // separatorBuilder: (context, index) => const Divider(),
-        itemBuilder: (context, i) {
-            final categories = _categoriesList![i];
+        actions:const [Padding(
+          padding: EdgeInsets.only(right: 16.0),
+          child: CircleAvatar(backgroundImage: AssetImage('assets/images/Avatar.png')),
+        )],
+      ),
+      body: (_categoriesList == null)
+          ? const SizedBox()
+          : ListView.builder(
+              itemCount: _categoriesList!.length,
+              // separatorBuilder: (context, index) => const Divider(),
+              itemBuilder: (context, i) {
+                final categories = _categoriesList![i];
 
 
-          return   CategoriesWidget(categories: categories);
+                return CategoriesWidget(categories: categories);
+              },
+            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          _categoriesList = await CategoriesRepository().getCategories();
+          setState(() {});
         },
+        child: const Icon(Icons.abc_sharp),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: ()  async{
-        _categoriesList= await CategoriesRepository().getCategories();
-        setState(() {
-        });
-      },
-      child: const Icon(Icons.abc_sharp),
-      ),
-
     );
   }
 }
