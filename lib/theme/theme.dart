@@ -23,21 +23,23 @@ final lightTheme = ThemeData(
 
   ),
   listTileTheme: const ListTileThemeData(iconColor: Colors.white),
-  textTheme: TextTheme(
-    labelLarge: const TextStyle(
+  textTheme: const TextTheme(
+    labelLarge: TextStyle(
         color: Colors.black,
         fontFamily: '.SF UI Display',
         fontSize: 28,
         fontWeight: FontWeight.bold),
-    bodyMedium: const TextStyle(
-      color: Colors.white,
+    titleMedium: TextStyle(
+      color: Colors.black,
+      fontFamily: '.SF UI Display',
+      fontSize: 18,
       fontWeight: FontWeight.w500,
-      fontSize: 20,
     ),
-    labelSmall: TextStyle(
-      color: Colors.white.withOpacity(0.6),
-      fontWeight: FontWeight.w700,
+    titleSmall: TextStyle(
+      color: Color.fromRGBO(0, 0, 0, 0.5),
+      fontFamily: '.SF UI Display',
       fontSize: 14,
+      fontWeight: FontWeight.w400,
     ),
   ),
 );

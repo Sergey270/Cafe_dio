@@ -19,11 +19,13 @@ class CategoriesWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-               // width: 150,
-
                 height: 148,
-               //  padding: const EdgeInsets.all(16.0),
-                margin: const EdgeInsets.fromLTRB(16.0,4.0,16.0,4.0,),
+                margin: const EdgeInsets.fromLTRB(
+                  16.0,
+                  4.0,
+                  16.0,
+                  4.0,
+                ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
@@ -33,17 +35,16 @@ class CategoriesWidget extends StatelessWidget {
               ),
             ],
           ),
-          // Column(
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   children: [
-              Container(
-                padding: const EdgeInsets.only(left: 32,top: 12, right:60, ),
-                child: Text(
-                  categories.name,
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-            //   ),
-            // ],
+          Container(
+            padding: const EdgeInsets.only(
+              left: 32,
+              top: 12,
+              right: 60,
+            ),
+            child: Text(
+              categories.name,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
           ),
         ],
       ),
