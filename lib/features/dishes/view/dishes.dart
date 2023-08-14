@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
 
-class DishesScreen extends StatefulWidget {
-  const DishesScreen({super.key});
+import '../../../repositories/categories/models/categories.dart';
 
-  @override
-  State<DishesScreen> createState() => _DishesScreenState();
-}
+class DishesScreen extends StatelessWidget {
+  final Categories categories;
 
-class _DishesScreenState extends State<DishesScreen> {
-  String? coinName;
-
-  @override
-  void didChangeDependencies() {
-    final args = ModalRoute.of(context)?.settings.arguments;
-    assert(args != null && args is String, 'You must provide String args');
-    coinName = args as String;
-    setState(() {});
-    super.didChangeDependencies();
-  }
+  const DishesScreen({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(coinName ?? '...')),
+      appBar: AppBar(title: Text(categories.name)),
     );
   }
 }

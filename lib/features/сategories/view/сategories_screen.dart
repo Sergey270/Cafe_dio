@@ -17,7 +17,7 @@ class CategoriesListScreen extends StatefulWidget {
 }
 
 class _CategoriesListScreenState extends State<CategoriesListScreen> {
-//  List<Categories>? _categoriesList;
+
 
   final _categoriesBloc = CategoriesBloc();
   @override
@@ -45,8 +45,18 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
             );
           }
           if (state is CategoriesLoadingFailure) {
-            return const Center(
-              child: Text(  'Нет Интернета'),
+            return   Center(
+              child: Column(
+                children: [
+                  const Text(  'Нет Интернета'),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextButton(onPressed: (){
+                    _categoriesBloc.add(LoadCategories());
+                  }, child: const Text('Повторить'))
+                ],
+              ),
             );
           }
           return const Center(

@@ -13,7 +13,9 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
   CategoriesBloc() : super(CategoriesInitial()) {
     on<LoadCategories>((event, emit) async{
      try {
+      // emit(CategoriesLoading());
        final categoriesList = await CategoriesRepository().getCategories();
+
          emit(CategoriesLoaded(categoriesList: categoriesList));
      }   catch (e) {
        emit(CategoriesLoadingFailure(exception: e));

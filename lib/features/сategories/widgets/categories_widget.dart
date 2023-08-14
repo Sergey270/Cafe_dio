@@ -1,6 +1,8 @@
 import 'package:cafe_dio/repositories/categories/models/categories.dart';
 import 'package:flutter/material.dart';
 
+import '../../dishes/view/dishes.dart';
+
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({
     Key? key,
@@ -18,20 +20,30 @@ class CategoriesWidget extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 148,
-                margin: const EdgeInsets.fromLTRB(
-                  16.0,
-                  4.0,
-                  16.0,
-                  4.0,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => DishesScreen(
+                              categories: categories,
+                            )),
+                  );
+                },
+                child: Container(
+                  height: 148,
+                  margin: const EdgeInsets.fromLTRB(
+                    16.0,
+                    4.0,
+                    16.0,
+                    4.0,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: NetworkImage(categories.image_url),
+                        fit: BoxFit.cover,
+                      )),
                 ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                      image: NetworkImage(categories.image_url),
-                      fit: BoxFit.cover,
-                    )),
               ),
             ],
           ),
