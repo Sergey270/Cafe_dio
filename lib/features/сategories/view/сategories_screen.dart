@@ -36,6 +36,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
         builder: (context, state) {
           if (state is CategoriesLoaded) {
             return ListView.builder(
+              shrinkWrap: true,
               itemCount: state.categoriesList.length,
               // separatorBuilder: (context, index) => const Divider(),
               itemBuilder: (context, i) {

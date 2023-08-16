@@ -15,21 +15,17 @@ class CategoriesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // final theme = Theme.of(context);
     return Center(
-      child: Stack(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => DishesScreen(
-                              categories: categories,
-                            )),
-                  );
-                },
-                child: Container(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context)
+              .pushNamed('/dishes', arguments: categories.name);
+        },
+        child: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
                   height: 148,
                   margin: const EdgeInsets.fromLTRB(
                     16.0,
@@ -44,21 +40,21 @@ class CategoriesWidget extends StatelessWidget {
                         fit: BoxFit.cover,
                       )),
                 ),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.only(
+                left: 32,
+                top: 12,
+                right: 60,
               ),
-            ],
-          ),
-          Container(
-            padding: const EdgeInsets.only(
-              left: 32,
-              top: 12,
-              right: 60,
+              child: Text(
+                categories.name,
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
             ),
-            child: Text(
-              categories.name,
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
 
