@@ -6,11 +6,11 @@ part 'dishes.g.dart';
 class Dishes {
   final int id;
   final String name;
-  final String price;
-  final String weight;
+  final int price;
+  final int weight;
   final String description;
   final String image_url;
-  final List tegs;
+   final List<String> tegs;
 
   Dishes({
     required this.id,
@@ -19,7 +19,7 @@ class Dishes {
     required this.weight,
     required this.description,
     required this.image_url,
-    required this.tegs,
+   required this.tegs,
   });
 
   factory Dishes.fromJson(Map<String, dynamic> json) => _$DishesFromJson(json);

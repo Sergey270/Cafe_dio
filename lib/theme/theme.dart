@@ -40,6 +40,13 @@ final lightTheme = ThemeData(
       fontFamily: '.SF UI Display',
       fontSize: 14,
       fontWeight: FontWeight.w400,
+          ),
+    bodyMedium: TextStyle(
+      color: Colors.black,
+      fontFamily: '.SF Pro Display',
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
     ),
+
   ),
 );

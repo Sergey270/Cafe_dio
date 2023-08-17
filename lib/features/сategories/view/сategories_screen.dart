@@ -66,23 +66,6 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
         },
       ),
 
-      // (_categoriesList == null)
-      //     ? const SizedBox()
-      //     : ListView.builder(
-      //         itemCount: _categoriesList!.length,
-      //         // separatorBuilder: (context, index) => const Divider(),
-      //         itemBuilder: (context, i) {
-      //           final categories = _categoriesList![i];
-      //           return CategoriesWidget(categories: categories);
-      //         },
-      //       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     _categoriesList = await CategoriesRepository().getCategories();
-      //     setState(() {});
-      //   },
-      //   child: const Icon(Icons.abc_sharp),
-      // ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:cafe_dio/repositories/categories/models/categories.dart';
 import 'package:flutter/material.dart';
 
-import '../../dishes/view/dishes.dart';
+import '../../dishes/view/dishes_screen.dart';
 
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({
