@@ -31,39 +31,42 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbar,
-      body: BlocBuilder<CategoriesBloc, CategoriesState>(
-        bloc: _categoriesBloc,
-        builder: (context, state) {
-          if (state is CategoriesLoaded) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: state.categoriesList.length,
-              // separatorBuilder: (context, index) => const Divider(),
-              itemBuilder: (context, i) {
-                final categories = state.categoriesList[i];
-                return CategoriesWidget(categories: categories);
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: BlocBuilder<CategoriesBloc, CategoriesState>(
+          bloc: _categoriesBloc,
+          builder: (context, state) {
+            if (state is CategoriesLoaded) {
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.categoriesList.length,
+                // separatorBuilder: (context, index) => const Divider(),
+                itemBuilder: (context, i) {
+                  final categories = state.categoriesList[i];
+                  return CategoriesWidget(categories: categories);
+                },
+              );
+            }
+            if (state is CategoriesLoadingFailure) {
+              return   Center(
+                child: Column(
+                  children: [
+                    const Text(  'Нет Интернета'),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextButton(onPressed: (){
+                      _categoriesBloc.add(LoadCategories());
+                    }, child: const Text('Повторить'))
+                  ],
+                ),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          }
-          if (state is CategoriesLoadingFailure) {
-            return   Center(
-              child: Column(
-                children: [
-                  const Text(  'Нет Интернета'),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  TextButton(onPressed: (){
-                    _categoriesBloc.add(LoadCategories());
-                  }, child: const Text('Повторить'))
-                ],
-              ),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+          },
+        ),
       ),
 
     );

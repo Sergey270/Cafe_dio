@@ -14,34 +14,19 @@ class CategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final theme = Theme.of(context);
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+
       child: GestureDetector(
         onTap: () {
           Navigator.of(context)
               .pushNamed('/dishes', arguments: categories.name);
         },
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  height: 148,
-                  margin: const EdgeInsets.fromLTRB(
-                    16.0,
-                    4.0,
-                    16.0,
-                    4.0,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: NetworkImage(categories.image_url),
-                        fit: BoxFit.cover,
-                      )),
-                ),
-              ],
-            ),
+
+            Image.network(categories.image_url,  fit: BoxFit.cover,),
             Container(
               padding: const EdgeInsets.only(
                 left: 32,
@@ -58,13 +43,6 @@ class CategoriesWidget extends StatelessWidget {
       ),
     );
 
-    //       GestureDetector(
-    //         onTap: () {
-    //           // Navigator.of(context)
-    //           //     .push(MaterialPageRoute(builder: (context) =>
-    //           //     ItemPage(productId: product.id)),
-    //           // );
-    //         },
-    //         child:
+
   }
 }
