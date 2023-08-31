@@ -13,15 +13,28 @@ part 'dishes_state.dart';
 
 class DishesBloc extends Bloc<DishesEvent, DishesState> {
   DishesBloc() : super(DishesInitial()) {
-    on<LoadDishes>((event, emit) async{
-     try {
-      // emit(CategoriesLoading());
-       final dishesList = await DishesRepository().getDishes();
+    on<LoadDishes>((event, emit) async {
+      try {
+        // emit(CategoriesLoading());
+        final dishesList = await DishesRepository().getDishes();
 
-         emit(DishesLoaded(dishesList: dishesList));
-     }   catch (e) {
-       emit(DishesLoadingFailure(exception: e));
-     }
+        emit(DishesLoaded(dishesList: dishesList));
+      } catch (e) {
+        emit(DishesLoadingFailure(exception: e));
+      }
     });
+    on<FilterDishes>( ( event , emit  ) async{
+      final dishesList = await DishesRepository().getDishes();
+      emit(DishesLoaded(dishesList: dishesList));
+
+      final filteredDishes = dishesList
+          .where(
+            (dishesList) => emit.any((tag) => dishesList.tegs.contains(tag)),
+      )
+          .toList();
+      emit(DishesLoaded(dishesList: filteredDishes));
+    });
+
+
   }
 }

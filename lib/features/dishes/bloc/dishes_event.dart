@@ -4,3 +4,6 @@ part of 'dishes_bloc.dart';
 abstract class DishesEvent {}
 
 class LoadDishes extends DishesEvent {}
+
+class FilterDishes extends DishesEvent {}
+

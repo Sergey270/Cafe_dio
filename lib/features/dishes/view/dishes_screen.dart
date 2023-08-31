@@ -14,13 +14,21 @@ class DishesScreen extends StatefulWidget {
 }
 
 class _DishesScreenState extends State<DishesScreen> {
+  final tegs = [
+    'Все меню',
+    'Салаты',
+    'С рисом',
+    'С рыбой',
+  ];
+  List<String> selectedTags = [];
+
+
   String? categoriesName;
 
   @override
   void didChangeDependencies() {
     final args = ModalRoute.of(context)!.settings.arguments;
     //  assert(args != null && args is String, 'You must provide String args' );
-
     categoriesName = args as String?;
     setState(() {});
     super.didChangeDependencies();
@@ -47,25 +55,46 @@ class _DishesScreenState extends State<DishesScreen> {
           if (state is DishesLoaded) {
             return Column(
               children: [
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: tegs
+                     .map(
+                       (e) => TextButton(
+                     onPressed: () {
+                       if (selectedTags.contains(e)) {
+                         setState(() {
+                           selectedTags.remove(e);
+                         });
+                       } else {
+                         setState(() {
+                           selectedTags.add(e);
+                         });
+                       }
+                    //   context.read<DishesCubit>().filterDishes(selectedTags);
+                     },
+                     style: ButtonStyle(
+                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                         RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(10),
+                         ),
+                       ),
+                       backgroundColor: MaterialStateProperty.all(
+                         selectedTags.contains(e) ? const Color.fromRGBO(51, 100, 224, 1) : Colors.grey[200],
+                       ),
+                     ),
+                     child: Text(
+                       e,
+                       style: TextStyle(
+                         color: selectedTags.contains(e) ? Colors.white : Colors.black, fontSize: 18,
+                       ),
+                     ),
+                   ),
+                 )
+                     .toList(),
+               ),
+                const SizedBox(height: 16),
                 Expanded(
-                  //flex: 1,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.dishesList[5].tegs.length,
-                    itemBuilder: (context, i) {
-                       final dishes = state.dishesList[i];
-                     return Container(
-                       margin: EdgeInsets.all(6),
-                       // height: 40 ,
-                        width: 100,
-                        color: Colors.black12,
-                       child: Text(dishes.tegs[i]),
-                      );
-                    },
-                  ),
-                ),
-                Expanded(
-                   flex: 9,
+
                   child: GridView.builder(
                     padding: const EdgeInsets.all(16),
                     gridDelegate:

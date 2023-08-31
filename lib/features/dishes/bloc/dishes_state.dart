@@ -8,6 +8,7 @@ class DishesLoading extends DishesState {}
 class DishesLoaded extends DishesState {
   final List<Dishes> dishesList;
 
+
   DishesLoaded({required this.dishesList});
 }
 class DishesLoadingFailure extends DishesState {

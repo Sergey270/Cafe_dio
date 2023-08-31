@@ -17,8 +17,6 @@ class CategoriesRepository {
     return jsonData
         .map((categoryData) => Categories.fromJson(categoryData))
         .toList();
-
-
   }
 }
 
