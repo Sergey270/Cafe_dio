@@ -23,18 +23,58 @@ class DishesBloc extends Bloc<DishesEvent, DishesState> {
         emit(DishesLoadingFailure(exception: e));
       }
     });
-    on<FilterDishes>( ( event , emit  ) async{
-      final dishesList = await DishesRepository().getDishes();
-      emit(DishesLoaded(dishesList: dishesList));
 
+    Future<void> filterDishes(List<String> selectedTags) async {
+      try {
+        final dishesList = await DishesRepository().getDishes();
+        if (selectedTags.isEmpty) {
+          emit(DishesLoaded(dishesList: dishesList));
+          return;
+        }
+        final filteredDishes = dishesList
+            .where(
+              (dish) => selectedTags.any((tag) => dish.tegs.contains(tag)),
+        )
+            .toList();
+        emit(DishesLoaded(dishesList: filteredDishes));
+      } catch (e) {
+       //
+      }
+    }
+
+
+
+    // on<FilterDishes>(   ( event , emit  ) async{
+    //   final dishesList = await DishesRepository().getDishes();
+    //   emit(DishesLoaded(dishesList: dishesList));
+    //
+    //   final filteredDishes = dishesList
+    //       .where(
+    //         (dishesList) => selectedTags.any((tag) => dishesList.tegs.contains(tag)),
+    //   )
+    //       .toList();
+    //   emit(FilterDishes(selectedTags:  filteredDishes,) as DishesState  ;
+    //   emit(DishesLoaded(dishesList: filteredDishes));
+    // });
+
+
+  }
+
+  Future<void>  filterDishes(List<String> selectedTags) async {
+    try {
+      final dishesList = await DishesRepository().getDishes();
+      if (selectedTags.isEmpty) {
+        emit(DishesLoaded(dishesList: dishesList));
+        return;
+      }
       final filteredDishes = dishesList
           .where(
-            (dishesList) => emit.any((tag) => dishesList.tegs.contains(tag)),
+            (dishesList) => selectedTags.any((tag) => dishesList.tegs.contains(tag)),
       )
           .toList();
       emit(DishesLoaded(dishesList: filteredDishes));
-    });
-
-
+    } catch (e) {
+      //
+    }
   }
 }

@@ -70,7 +70,8 @@ class _DishesScreenState extends State<DishesScreen> {
                            selectedTags.add(e);
                          });
                        }
-                    //   context.read<DishesCubit>().filterDishes(selectedTags);
+                       _dishesBloc.add(FilterDishes(selectedTags: selectedTags));
+                     context.read<DishesBloc>().filterDishes(selectedTags);
                      },
                      style: ButtonStyle(
                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
