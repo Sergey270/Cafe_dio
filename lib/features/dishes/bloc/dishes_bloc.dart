@@ -24,11 +24,13 @@ class DishesBloc extends Bloc<DishesEvent, DishesState> {
       }
     });
 
-    Future<void> filterDishes(List<String> selectedTags) async {
+
+    Future<void>  filterDishes(  event,   emit,) async {
       try {
         final dishesList = await DishesRepository().getDishes();
+        List<String> selectedTags = [];
         if (selectedTags.isEmpty) {
-          emit(DishesLoaded(dishesList: dishesList));
+          emit(DishesLoaded(dishesList: dishesList) as DishesInitial);
           return;
         }
         final filteredDishes = dishesList
@@ -36,12 +38,12 @@ class DishesBloc extends Bloc<DishesEvent, DishesState> {
               (dish) => selectedTags.any((tag) => dish.tegs.contains(tag)),
         )
             .toList();
-        emit(DishesLoaded(dishesList: filteredDishes));
+        emit(DishesLoaded(dishesList: filteredDishes) as DishesInitial);
       } catch (e) {
        //
       }
     }
-
+    on<FilterDishes>( filterDishes);
 
 
     // on<FilterDishes>(   ( event , emit  ) async{

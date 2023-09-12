@@ -14,13 +14,7 @@ class DishesScreen extends StatefulWidget {
 }
 
 class _DishesScreenState extends State<DishesScreen> {
-  final tegs = [
-    'Все меню',
-    'Салаты',
-    'С рисом',
-    'С рыбой',
-  ];
-  List<String> selectedTags = [];
+
 
 
   String? categoriesName;
@@ -55,44 +49,7 @@ class _DishesScreenState extends State<DishesScreen> {
           if (state is DishesLoaded) {
             return Column(
               children: [
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: tegs
-                     .map(
-                       (e) => TextButton(
-                     onPressed: () {
-                       if (selectedTags.contains(e)) {
-                         setState(() {
-                           selectedTags.remove(e);
-                         });
-                       } else {
-                         setState(() {
-                           selectedTags.add(e);
-                         });
-                       }
-                       _dishesBloc.add(FilterDishes(selectedTags: selectedTags));
-                     context.read<DishesBloc>().filterDishes(selectedTags);
-                     },
-                     style: ButtonStyle(
-                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                         RoundedRectangleBorder(
-                           borderRadius: BorderRadius.circular(10),
-                         ),
-                       ),
-                       backgroundColor: MaterialStateProperty.all(
-                         selectedTags.contains(e) ? const Color.fromRGBO(51, 100, 224, 1) : Colors.grey[200],
-                       ),
-                     ),
-                     child: Text(
-                       e,
-                       style: TextStyle(
-                         color: selectedTags.contains(e) ? Colors.white : Colors.black, fontSize: 18,
-                       ),
-                     ),
-                   ),
-                 )
-                     .toList(),
-               ),
+
                 const SizedBox(height: 16),
                 Expanded(
 
